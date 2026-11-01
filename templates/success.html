@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}تم التسجيل بنجاح{% endblock %}
+
+{% block content %}
+<div class="main-container text-center">
+    <div class="mb-4">
+        <i class="fas fa-check-circle" style="font-size: 100px; color: var(--tvtc-green);"></i>
+    </div>
+    
+    <h1 class="page-title">تم التسجيل بنجاح!</h1>
+    
+    <div class="alert-tvtc mt-4">
+        <h4 class="mb-3">مرحباً {{ trainee.full_name }} 👋</h4>
+        <p class="mb-0">تم تسجيلك في اختبار  <strong>مقدمة تطبيقات الحاسب</strong></p>
+    </div>
+
+    <div class="card card-tvtc mt-4">
+        <div class="card-header">
+            <i class="fas fa-file-invoice ms-2"></i> تفاصيل التسجيل
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 text-start">
+                    <p><i class="fas fa-id-card text-muted ms-2"></i> <strong>الرقم التدريبي:</strong> {{ trainee.trainee_id }}</p>
+                    <p><i class="fas fa-envelope text-muted ms-2"></i> <strong>البريد:</strong> {{ trainee.email }}</p>
+                    <p><i class="fas fa-mobile-alt text-muted ms-2"></i> <strong>الجوال:</strong> {{ trainee.phone }}</p>
+                </div>
+                <div class="col-md-6 text-start">
+                    <p><i class="fas fa-calendar-day text-muted ms-2"></i> <strong>التاريخ:</strong> {{ session.session_date.strftime('%Y-%m-%d') }}</p>
+                    <p><i class="fas fa-clock text-muted ms-2"></i> <strong>الوقت:</strong> {{ session.session_time.strftime('%H:%M') }}</p>
+                    <p><i class="fas fa-map-marker-alt text-muted ms-2"></i> <strong>المعمل:</strong> {{ session.location }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if email_sent %}
+    <div class="alert alert-success mt-3">
+        <i class="fas fa-envelope-open-text ms-2"></i> تم إرسال تأكيد التسجيل إلى بريدك الإلكتروني
+    </div>
+    {% else %}
+    <div class="alert alert-warning mt-3">
+        <i class="fas fa-exclamation-triangle ms-2"></i> تم تسجيلك، ولكن لم نتمكن من إرسال البريد الإلكتروني. يرجى حفظ هذه الصفحة.
+    </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <button onclick="window.print()" class="btn btn-tvtc-outline me-2">
+            <i class="fas fa-print ms-2"></i> طباعة
+        </button>
+        <a href="{{ url_for('index') }}" class="btn btn-tvtc">
+            <i class="fas fa-home ms-2"></i> العودة
+        </a>
+    </div>
+</div>
+{% endblock %}
